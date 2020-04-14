@@ -35,9 +35,9 @@ let menu = [{
     class: Pacifist
   },
   {
-    title: `BASE`,
-    id: `base`,
-    class: BaseChess
+    title: `ESP`,
+    id: `esp`,
+    class: ESP
   },
 ];
 

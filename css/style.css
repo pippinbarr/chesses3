@@ -148,6 +148,15 @@ a {
   display: none;
 }
 
+#verbose-message {
+  background-color: yellow;
+  color: black;
+  text-align: center;
+  font-size: 1em;
+  padding-left: 1em;
+  display: none;
+}
+
 .option {
   /* padding-top: 1em; */
   cursor: pointer;

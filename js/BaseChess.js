@@ -268,6 +268,16 @@ class BaseChess {
     $('#message').slideUp();
   }
 
+
+  showVerboseMessage(message) {
+    $('#verbose-message').text(message);
+    $('#verbose-message').slideDown();
+  }
+
+  hideVerboseMessage() {
+    $('#verbose-message').slideUp();
+  }
+
   getTurn(current) {
     if (current) {
       this.game.turn()
