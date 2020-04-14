@@ -30,6 +30,11 @@ let menu = [{
     class: Immortal
   },
   {
+    title: `PACIFIST`,
+    id: `pacifist`,
+    class: Pacifist
+  },
+  {
     title: `BASE`,
     id: `base`,
     class: BaseChess
