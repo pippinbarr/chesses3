@@ -51,3 +51,17 @@ Maybes
 So that is nine actual candidates. There really only one here that would be a proper game of chess (HALVES), and the rest are more comic interpretations of playing chess. I suppose DRESSAGE could be considered basically like a game.
 
 A bunch of these can be made quite swiftly with only a couple seeming confusing (DRESSAGE, MEMORY and MEMENTO all seem a bit challenging).
+
+---
+
+# 3.5 games made (Tuesday, 14 April 2020, 15:33PM)
+
+Today I've managed to put together 4'33", IMMORTAL, PACIFIST, and the start of ESP. They're all exceeding simple "variations" so it's not surprising they didn't take very long, but a couple of them are pretty satisfying.
+
+4'33" came together kind of beautifully with the realization I could use the actual game title (and menu item) as a counter that tells you how long the performance has to go. It quits back to the menu when it's completed. (Could add applause at the end actually?) It's austere and quite nice I think, I actually like the core idea of being asked to sit and, I guess, think about chess rather than play it?
+
+IMMORTAL works perfectly well, though it's obviously kind of frustrating. Showed it to Rilla who liked it more than I expected somehow. Needs an info panel at the very least to point people toward the correct move sequence. I've also wondered about literally indicating what the correct next move for black is, so you can just play through, but it's true that removes at least some of the mystery of the thing?
+
+PACIFIST just works (even used `.filter()` because I'm so impressive with JavaScript arrays right?). I like that you can still get check and checkmate. It may invite a kind of playful movement of piece knowing you don't actually have to worry about being captured? Maybe you can move away from the whole war?
+
+ESP is begun, but I've got a bit of a crisis in terms of how I'm positioning it. I started work on it thinking I'd have a whole kind of "fake ESP response" from the game, so pieces would jiggle around as if reacting to the player and maybe eventually a move would even be played. But the more I think about this the more silly it seems? Or rather, it seems dishonest because it's not really asking for ESP, it's just playing around with the idea of bad ESP? And it's not clear to me these variations have ever meant to be about that level of trickery? Sort of storytelling versus something more "pure" I suppose? Not sure where to land on that one yet.
