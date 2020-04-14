@@ -13,46 +13,21 @@ Another eight variations of chess, following on from Chesses.
 let MOBILE = false;
 
 // The basic information about the game to display as part of the menu
-const TITLE = `CHESSES2`;
+const TITLE = `CHESSES3`;
 const AUTHOR = `BY <a href="https://www.pippinbarr.com/" target="_blank">&nbsp;PIPPIN BARR</a>`;
 
 // The game itself (as represented by BaseChess and its children)
 let chess;
 // The menu data
 let menu = [{
-    title: "SAMSARA",
-    class: Samsara
+    title: `4'33"`,
+    id: `cage`,
+    class: Cage
   },
   {
-    title: "REVERSAL",
-    class: Reversal
-  },
-  {
-    title: "FOG",
-    class: Fog
-  },
-  {
-    title: "XR",
-    info: "Use this virtual board to play cross-reality chess! Orient your device screen up and place appropriately sized chess pieces in the standard opening position!",
-    class: XR
-  },
-  {
-    title: "LEWITT",
-    info: `An homage to <a href="https://en.wikipedia.org/wiki/Sol_LeWitt">Sol LeWitt</a>'s <a href="https://en.wikipedia.org/wiki/Sol_LeWitt#Wall_drawings">wall drawings</a>.`,
-    class: LeWitt
-  },
-  {
-    title: "MUSICAL",
-    class: Musical
-  },
-  {
-    title: "3D",
-    class: ThreeDee
-  },
-  {
-    title: "CHECK-RS",
-    info: "Checkers-style capturing only. Knights, being non-linear, cannot capture anything. Win by capturing the opponent's king.",
-    class: Draughts
+    title: `BASE`,
+    id: `base`,
+    class: BaseChess
   },
 ];
 
@@ -60,7 +35,6 @@ $(document).ready(chessesSetup);
 
 // Do the work of setting up and displaying the menu
 function chessesSetup() {
-
   $('#title').text(`${TITLE}`)
   $('#author').html(`${AUTHOR}`)
 
@@ -71,7 +45,7 @@ function chessesSetup() {
   for (let i = 0; i < menu.length; i++) {
     let $menuItem = $('<div>')
       .addClass('menu-item active')
-      .attr('id', menu[i].title)
+      .attr('id', menu[i].id)
       .html(`${menu[i].title}`)
       .data('game', menu[i].title)
       .data('info', menu[i].info)
@@ -92,7 +66,7 @@ function chessesSetup() {
   // The info text is displayed inside the info panel
   const $infoText = $('<div>')
     .addClass('info-text')
-    .html("DRAUGHTS<p>What is this?</p>")
+    .html("")
     .appendTo($infoPanel);
 }
 
@@ -149,7 +123,9 @@ function menuClicked(e) {
   // Slide away the elements we shouldn't see, including the author
   // and all menu items not presently being played
   $('#author').slideUp();
-  $.when($('.menu-item').not(`#${$(this).data('game')}`).slideUp(500, () => {
+  console.log(`#${menu[index].id}`)
+  $.when($('.menu-item').not(`#${menu[index].id}`).slideUp(500, () => {
+      console.log("slideUp")
       // Once all the menu items are gone, we can slide down the game
       $('#game').slideDown(() => {
         // If there are instructions slide them down (for Fog)
