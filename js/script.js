@@ -25,6 +25,11 @@ let menu = [{
     class: Cage
   },
   {
+    title: `IMMORTAL`,
+    id: `immortal`,
+    class: Immortal
+  },
+  {
     title: `BASE`,
     id: `base`,
     class: BaseChess
@@ -123,9 +128,7 @@ function menuClicked(e) {
   // Slide away the elements we shouldn't see, including the author
   // and all menu items not presently being played
   $('#author').slideUp();
-  console.log(`#${menu[index].id}`)
   $.when($('.menu-item').not(`#${menu[index].id}`).slideUp(500, () => {
-      console.log("slideUp")
       // Once all the menu items are gone, we can slide down the game
       $('#game').slideDown(() => {
         // If there are instructions slide them down (for Fog)
