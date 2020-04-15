@@ -65,3 +65,11 @@ IMMORTAL works perfectly well, though it's obviously kind of frustrating. Showed
 PACIFIST just works (even used `.filter()` because I'm so impressive with JavaScript arrays right?). I like that you can still get check and checkmate. It may invite a kind of playful movement of piece knowing you don't actually have to worry about being captured? Maybe you can move away from the whole war?
 
 ESP is begun, but I've got a bit of a crisis in terms of how I'm positioning it. I started work on it thinking I'd have a whole kind of "fake ESP response" from the game, so pieces would jiggle around as if reacting to the player and maybe eventually a move would even be played. But the more I think about this the more silly it seems? Or rather, it seems dishonest because it's not really asking for ESP, it's just playing around with the idea of bad ESP? And it's not clear to me these variations have ever meant to be about that level of trickery? Sort of storytelling versus something more "pure" I suppose? Not sure where to land on that one yet.
+
+---
+
+# Is ESP real? (Wednesday, 15 April 2020, 9:56AM)
+
+So do I make the ESP variant pretend that ESP is working, or do I make it actually depend on ESP? I kind of think it has to be the latter even if the former is way more funny to actually experience. There's something about it that bothers me, as it's no longer a _variant_ of chess, but rather a storytelling/narrative experience on the top of chess. Whereas, like MANIFEST, you can make a computer chess game that could be trained by... wait a second, ESP isn't right really is it, it's about _perception_ no influence. Fuck. Telekinesis then? Psionic? Yeah maybe.
+
+Same principle applies despite the word obviously. Think I've really answered my question then. 
