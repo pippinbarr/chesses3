@@ -19,9 +19,11 @@ class Dressage extends BaseChess {
     this.score = {
       w: 0,
       b: 0
+    };
+    this.patternLength = {
+      w: 1,
+      b: 1
     }
-
-    this.patternLength = 3;
 
     setTimeout(() => {
       this.startTurn();
@@ -48,7 +50,7 @@ class Dressage extends BaseChess {
     let turn = this.game.turn();
     let squares = this.startSquares[this.game.turn()];
     let start = squares[Math.floor(Math.random() * squares.length)];
-    let pattern = this.getNextMoves(start, start, this.patternLength);
+    let pattern = this.getNextMoves(start, start, this.patternLength[turn]);
     this.reset(turn);
     return pattern;
   }
@@ -106,6 +108,15 @@ class Dressage extends BaseChess {
     }
     else {
       // Either chose the wrong square or piece or something! Fail!
+      let from = this.currentPattern[this.currentStep].from;
+      let to = this.currentPattern[this.currentStep].to;
+      $(`.square-${from} img`).effect('shake', {
+        distance: 2,
+        times: 5,
+        duration: 400,
+        direction: 'left'
+      });
+      this.highlight(to);
       this.handleTurnEnd(false);
     }
   }
@@ -155,21 +166,23 @@ class Dressage extends BaseChess {
   }
 
   handleTurnEnd(correct) {
-    console.log(`handleTurnEnd(${correct})`);
+    let resultWord = correct ? 'CORRECT!' : 'INCORRECT!';
+
     // Whose turn is it?
     let turn = this.game.turn();
 
     // No more input!
     this.disableInput();
 
-    // If they got it right, update their score
+    // If they got it right, update their score and pattern length
     if (correct) {
       this.score[turn]++;
+      this.patternLength[turn]++;
     }
     this.displayScore();
 
+    // Check for a winner
     let scoreDifference = this.score.w - this.score.b;
-    console.log(`Score difference: ${scoreDifference}`);
     if (scoreDifference >= 2) {
       // White wins
       this.showMessage("WHITE WINS!");
@@ -179,7 +192,9 @@ class Dressage extends BaseChess {
       this.showMessage("BLACK WINS!");
     }
     else {
+      // Nobody has won yet
       // Switch to the next turn
+      this.showMessage(resultWord);
       setTimeout(() => {
         this.hideMessage();
         setTimeout(() => {

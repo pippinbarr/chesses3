@@ -17,7 +17,9 @@
 # HALVES
 
 - What happens when half a piece puts the king in check?
-- What happens when half of one type of piece moves onto half of another type of piece? (Could you run out of board real estate?)
+- What happens when half of one type of piece moves onto half of another type of piece? (Could you run out of board real estate if they can't colocate? How do you choose which moves if they can?)
+- Maybe you can just only ever move half a piece? So halves don't get halved, they just move. And a half can't capture a whole, but a whole can capture a half (and a whole), a half can capture a half...?
+- Info panel
 
 # IMMORTAL
 
@@ -37,10 +39,13 @@
 # DRESSAGE
 
 - ~~Make a basic prototype~~
+- ~~Less abrupt transition (maybe a "correct!") message~~
+- ~~Detect winning and losing (basically by gaining a lead of one) and react~~
+- ~~__DOESN'T MOVE, DOES SHAKE HORSE, DOES SHOW CORRECT SQUARE__ Maybe incorrect move performs the move but then shakes the horse and plays a bad sound?~~
+- ~~Reset the knight faster but add a pause after that~~
+- ~~Track pattern lengths individually so one player could be on 4 while the other is on 5 for instance?~~
 
 - Sounds for each move that are maybe more nice sounding, channeling Simon Says? Rising tones?
-- Less abrupt transition (maybe a "correct!") message
-- Detect winning and losing (basically by gaining a lead of one) and react
 - Consider whether we want one giant pattern each instead of a constantly random one (Simon music game does this too)
 - Info panel
 
