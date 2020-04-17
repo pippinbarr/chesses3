@@ -16,18 +16,27 @@ class Dressage extends BaseChess {
       w: [`b1`, `g1`],
       b: [`b8`, `g8`]
     };
+    this.score = {
+      w: 0,
+      b: 0
+    }
 
     this.patternLength = 3;
-    this.startTurn();
+
+    setTimeout(() => {
+      this.startTurn();
+    }, 1000);
   }
 
   startTurn() {
+    this.displayScore();
+
     let turn = this.game.turn();
     this.reset(turn);
 
     this.currentPattern = this.generatePattern();
-
     this.currentStep = 0;
+
     this.disableInput();
 
     setTimeout(() => {
@@ -45,13 +54,13 @@ class Dressage extends BaseChess {
   }
 
   reset(turn) {
+    this.clearHighlights();
     this.game.reset();
     this.changeTurnTo(turn);
-    this.board.position(this.game.fen(), false);
+    this.board.position(this.game.fen(), true);
   }
 
   getNextMoves(start, from, depth) {
-    console.log(`getNextMoves(${start},${from},${depth})`);
     if (depth === 0) return [];
     let moves = this.game.moves({
       square: from,
@@ -72,7 +81,6 @@ class Dressage extends BaseChess {
         clearInterval(interval);
         this.clearHighlights();
         this.enableInput();
-        console.log("Pattern complete: ", this.game.turn());
         return;
       }
       this.clearHighlights();
@@ -89,16 +97,16 @@ class Dressage extends BaseChess {
     if (square === this.currentPattern[0].from && piece.type === `n`) {
       // We are selecting the correct knight to begin
       this.from = square;
+      this.highlight(this.from);
     }
     else if (this.from !== null && square === this.currentPattern[this.currentStep].to) {
+      this.clearHighlights();
       // We chose the correct square to move the piece to!
-      console.log("Correct!");
       this.move(this.from, this.currentPattern[this.currentStep].to);
     }
     else {
       // Either chose the wrong square or piece or something! Fail!
-      console.log("Nope.");
-      this.nextTurn();
+      this.handleTurnEnd(false);
     }
   }
 
@@ -138,17 +146,56 @@ class Dressage extends BaseChess {
     this.currentStep++;
     // If they've hit the end of the pattern, very nice!
     if (this.currentStep === this.currentPattern.length) {
-      console.log("All correct!");
-      // Switch turns
-      this.nextTurn();
+      this.handleTurnEnd(true);
     }
-    // Input is allowed again
-    this.enableInput();
-    // Just in case
-    this.hideMessage();
+    else {
+      // Input is allowed again
+      this.enableInput();
+    }
+  }
+
+  handleTurnEnd(correct) {
+    console.log(`handleTurnEnd(${correct})`);
+    // Whose turn is it?
+    let turn = this.game.turn();
+
+    // No more input!
+    this.disableInput();
+
+    // If they got it right, update their score
+    if (correct) {
+      this.score[turn]++;
+    }
+    this.displayScore();
+
+    let scoreDifference = this.score.w - this.score.b;
+    console.log(`Score difference: ${scoreDifference}`);
+    if (scoreDifference >= 2) {
+      // White wins
+      this.showMessage("WHITE WINS!");
+    }
+    else if (scoreDifference <= -2) {
+      // Black wins
+      this.showMessage("BLACK WINS!");
+    }
+    else {
+      // Switch to the next turn
+      setTimeout(() => {
+        this.hideMessage();
+        setTimeout(() => {
+          // Switch turns
+          this.nextTurn();
+        }, 1000);
+      }, 2000);
+    }
+  }
+
+  displayScore() {
+    this.showVerboseMessage(`WHITE ${this.score.w} - ${this.score.b} BLACK`);
   }
 
   nextTurn() {
+    console.log("nextTurn()");
     // Flip the turn (as it would be with the player who just failed or succeeded)
     this.flipTurn();
     // Indicate the turn visually

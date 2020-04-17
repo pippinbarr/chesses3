@@ -146,11 +146,12 @@ a {
   letter-spacing: 1em;
   padding-left: 1em;
   display: none;
+  margin-bottom: 0.5em;
 }
 
 #verbose-message {
-  background-color: yellow;
-  color: black;
+  background-color: black;
+  color: yellow;
   text-align: center;
   font-size: 1em;
   padding-left: 1em;

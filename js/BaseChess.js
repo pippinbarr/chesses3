@@ -200,7 +200,6 @@ class BaseChess {
 
   enableInput() {
     if (this.inputEnabled) return;
-    console.log("Enabling input.");
     this.inputEnabled = true;
     $(SQUARE).on('click', (event) => {
       this.squareClicked(event);
@@ -209,15 +208,12 @@ class BaseChess {
 
   disableInput() {
     if (!this.inputEnabled) return;
-    console.log("Disabling input");
     this.inputEnabled = false;
     $(SQUARE).off('click');
   }
 
   changeTurn() {
-    // console.log("changeTurn()");
     if (this.gameOver) return;
-    // console.log(this.game.turn());
     if (this.game.turn() === this.game.WHITE) {
       $('.board-b72b1').removeClass('blackTurn', 250);
       $('.board-b72b1').addClass('whiteTurn', 250, () => {

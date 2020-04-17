@@ -94,7 +94,7 @@ function titleClicked() {
   $('.instruction').slideUp();
   $('#message').slideUp();
   $('.info-panel').slideUp();
-  $('#fog-message').slideUp();
+  $('#verbose-message').slideUp();
 
   // Disable the title from "quitting" when you're already there
   $('#title').removeClass('active');
