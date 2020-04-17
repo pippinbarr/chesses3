@@ -6,9 +6,14 @@
 
 # COMEDY
 
-# ESP
+# PSIONIC
+
+- ~~Make it~~
 
 # HALVES
+
+- What happens when half a piece puts the king in check?
+- What happens when half of one type of piece moves onto half of another type of piece? (Could you run out of board real estate?)
 
 # IMMORTAL
 

@@ -37,6 +37,7 @@ class BaseChess {
 
     this.board = ChessBoard('board', this.config);
     this.game = new Chess();
+    this.inputEnabled = false;
 
     this.from = null;
     this.lastMove = null;
@@ -192,12 +193,14 @@ class BaseChess {
     else {
       if (this.gameOver) return;
       this.changeTurn();
+      this.enableInput();
       this.hideMessage();
     }
   }
 
   enableInput() {
-    if (this.inputEnabled === true) return;
+    if (this.inputEnabled) return;
+    console.log("Enabling input.");
     this.inputEnabled = true;
     $(SQUARE).on('click', (event) => {
       this.squareClicked(event);
@@ -205,7 +208,8 @@ class BaseChess {
   }
 
   disableInput() {
-    if (this.inputEnabled === false) return;
+    if (!this.inputEnabled) return;
+    console.log("Disabling input");
     this.inputEnabled = false;
     $(SQUARE).off('click');
   }
@@ -217,14 +221,14 @@ class BaseChess {
     if (this.game.turn() === this.game.WHITE) {
       $('.board-b72b1').removeClass('blackTurn', 250);
       $('.board-b72b1').addClass('whiteTurn', 250, () => {
-        this.enableInput();
+        // this.enableInput();
         this.from = null;
       });
     }
     else {
       $('.board-b72b1').removeClass('whiteTurn', 250);
       $('.board-b72b1').addClass('blackTurn', 250, () => {
-        this.enableInput();
+        // this.enableInput();
         this.from = null;
       });
     }

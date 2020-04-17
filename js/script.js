@@ -2,7 +2,7 @@
 
 /*****************
 
-Chesses 2
+Chesses 3
 Pippin Barr
 
 Another eight variations of chess, following on from Chesses.
@@ -38,6 +38,11 @@ let menu = [{
     title: `PSIONIC`,
     id: `psionic`,
     class: Psionic
+  },
+  {
+    title: `DRESSAGE`,
+    id: `dressage`,
+    class: Dressage
   },
 ];
 
