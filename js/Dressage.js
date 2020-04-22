@@ -12,46 +12,49 @@ class Dressage extends BaseChess {
 
   setup() {
     super.setup();
-    this.startSquares = {
-      w: [`b1`, `g1`],
-      b: [`b8`, `g8`]
-    };
-    this.score = {
-      w: 0,
-      b: 0
-    };
-    this.patternLength = {
-      w: 1,
-      b: 1
+    this.disableInput();
+
+    this.data = {
+      turn: 'w',
+      w: {
+        score: 0,
+        startSquares: [`b1`, `g1`],
+        currentLength: 1,
+        currentStep: 0
+      },
+      b: {
+        score: 0,
+        startSquares: [`b8`, `g8`],
+        currentLength: 1,
+        currentStep: 0
+      }
     }
 
+    this.data.w.pattern = this.generatePattern('w', 10);
+    this.data.b.pattern = this.generatePattern('b', 10);
+
     setTimeout(() => {
-      this.startTurn();
+      this.startTurn('w');
     }, 1000);
   }
 
-  startTurn() {
+  startTurn(color) {
     this.displayScore();
 
-    let turn = this.game.turn();
-    this.reset(turn);
-
-    this.currentPattern = this.generatePattern();
-    this.currentStep = 0;
-
-    this.disableInput();
+    this.from = null;
+    this.data.turn = color
+    this.data[color].currentStep = 0;
+    this.reset(this.data.turn);
 
     setTimeout(() => {
-      this.showPattern(this.currentPattern);
+      this.showPattern(this.data.turn, this.data[this.data.turn].pattern);
     }, 2000);
   }
 
-  generatePattern() {
-    let turn = this.game.turn();
-    let squares = this.startSquares[this.game.turn()];
-    let start = squares[Math.floor(Math.random() * squares.length)];
-    let pattern = this.getNextMoves(start, start, this.patternLength[turn]);
-    this.reset(turn);
+  generatePattern(color, length) {
+    this.reset(color);
+    let start = getRandomElement(this.data[color].startSquares);
+    let pattern = this.getNextMoves(color, start, start, length);
     return pattern;
   }
 
@@ -62,24 +65,24 @@ class Dressage extends BaseChess {
     this.board.position(this.game.fen(), true);
   }
 
-  getNextMoves(start, from, depth) {
+  getNextMoves(color, start, from, depth) {
     if (depth === 0) return [];
+    this.changeTurnTo(color);
     let moves = this.game.moves({
       square: from,
       verbose: true
     }).filter(a => !this.game.get(a.to) && a.to !== start);
-    let move = moves[Math.floor(Math.random() * moves.length)];
+    let move = getRandomElement(moves);
     this.game.move(move);
-    this.flipTurn();
-    let result = [move, ...this.getNextMoves(start, move.to, depth - 1)];
+    let result = [move, ...this.getNextMoves(color, start, move.to, depth - 1)];
     return result;
   }
 
-  showPattern(pattern) {
+  showPattern(color, pattern) {
     let i = 0;
     this.highlight(pattern[0].from);
     let interval = setInterval(() => {
-      if (i === pattern.length) {
+      if (i === this.data[color].currentLength) {
         clearInterval(interval);
         this.clearHighlights();
         this.enableInput();
@@ -95,28 +98,30 @@ class Dressage extends BaseChess {
     // Find out the notation of the square and also the element representing the piece
     let square = $(event.currentTarget).attr('data-square');
     let piece = this.game.get(square);
+    let step = this.data[this.data.turn].currentStep;
+    let pattern = this.data[this.data.turn].pattern;
+    let nextMove = pattern[step];
 
-    if (square === this.currentPattern[0].from && piece.type === `n`) {
+    if (square === nextMove.from) {
       // We are selecting the correct knight to begin
       this.from = square;
       this.highlight(this.from);
     }
-    else if (this.from !== null && square === this.currentPattern[this.currentStep].to) {
+    else if (this.from !== null && square === nextMove.to) {
       this.clearHighlights();
       // We chose the correct square to move the piece to!
-      this.move(this.from, this.currentPattern[this.currentStep].to);
+      this.move(this.from, nextMove.to);
     }
     else {
+      console.log(`square: ${square}, nextMove.from: ${nextMove.from}, this.from: ${this.from}, nextMove.to: ${nextMove.to}`);
       // Either chose the wrong square or piece or something! Fail!
-      let from = this.currentPattern[this.currentStep].from;
-      let to = this.currentPattern[this.currentStep].to;
-      $(`.square-${from} img`).effect('shake', {
+      $(`.square-${nextMove.from} img`).effect('shake', {
         distance: 2,
         times: 5,
         duration: 400,
         direction: 'left'
       });
-      this.highlight(to);
+      this.highlight(nextMove.to);
       this.handleTurnEnd(false);
     }
   }
@@ -152,11 +157,15 @@ class Dressage extends BaseChess {
     // Revert the move to the current player (in case they need to keep going)
     this.flipTurn();
     // Assume they're moving the piece they just moved
-    this.from = this.currentPattern[this.currentStep].to;
+    let turn = this.data.turn;
+    let pattern = this.data[turn].pattern;
+    let step = this.data[turn].currentStep;
+
+    this.from = pattern[step].to;
     // Go to the next step in the pattern
-    this.currentStep++;
+    this.data[turn].currentStep++;
     // If they've hit the end of the pattern, very nice!
-    if (this.currentStep === this.currentPattern.length) {
+    if (this.data[turn].currentStep === this.data[turn].currentLength) {
       this.handleTurnEnd(true);
     }
     else {
@@ -166,6 +175,7 @@ class Dressage extends BaseChess {
   }
 
   handleTurnEnd(correct) {
+    console.log(`handleTurnEnd(${correct})`);
     let resultWord = correct ? 'CORRECT!' : 'INCORRECT!';
 
     // Whose turn is it?
@@ -176,13 +186,13 @@ class Dressage extends BaseChess {
 
     // If they got it right, update their score and pattern length
     if (correct) {
-      this.score[turn]++;
-      this.patternLength[turn]++;
+      this.data[turn].score++;
+      this.data[turn].currentLength++; // CHECK for reaching the limit???
     }
     this.displayScore();
 
     // Check for a winner
-    let scoreDifference = this.score.w - this.score.b;
+    let scoreDifference = this.data.w.score - this.data.b.score;
     if (scoreDifference >= 2) {
       // White wins
       this.showMessage("WHITE WINS!");
@@ -206,17 +216,18 @@ class Dressage extends BaseChess {
   }
 
   displayScore() {
-    this.showVerboseMessage(`WHITE ${this.score.w} - ${this.score.b} BLACK`);
+    this.showVerboseMessage(`WHITE ${this.data.w.score} - ${this.data.b.score} BLACK`);
   }
 
   nextTurn() {
-    console.log("nextTurn()");
     // Flip the turn (as it would be with the player who just failed or succeeded)
     this.flipTurn();
+    this.data.turn = this.game.turn();
+    console.log(`Next turn is: ${this.data.turn}`);
     // Indicate the turn visually
     this.changeTurn();
     // Generate the next pattern etc.
-    this.startTurn();
+    this.startTurn(this.data.turn);
   }
 
   quit() {
