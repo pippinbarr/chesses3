@@ -44,10 +44,11 @@
 - ~~__DOESN'T MOVE, DOES SHAKE HORSE, DOES SHOW CORRECT SQUARE__ Maybe incorrect move performs the move but then shakes the horse and plays a bad sound?~~
 - ~~Reset the knight faster but add a pause after that~~
 - ~~Track pattern lengths individually so one player could be on 4 while the other is on 5 for instance?~~
+- ~~Consider whether we want one giant pattern each instead of a constantly random one (Simon music game does this too)~~
 
 - Sounds for each move that are maybe more nice sounding, channeling Simon Says? Rising tones?
-- Consider whether we want one giant pattern each instead of a constantly random one (Simon music game does this too)
 - Info panel
+- Draw if you both reach the end of the pattern (I suppose if one player gets to the end and then the other fails then the player who reached the end wins)
 
 # MEMORY
 

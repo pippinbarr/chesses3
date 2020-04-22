@@ -72,4 +72,57 @@ ESP is begun, but I've got a bit of a crisis in terms of how I'm positioning it.
 
 So do I make the ESP variant pretend that ESP is working, or do I make it actually depend on ESP? I kind of think it has to be the latter even if the former is way more funny to actually experience. There's something about it that bothers me, as it's no longer a _variant_ of chess, but rather a storytelling/narrative experience on the top of chess. Whereas, like MANIFEST, you can make a computer chess game that could be trained by... wait a second, ESP isn't right really is it, it's about _perception_ no influence. Fuck. Telekinesis then? Psionic? Yeah maybe.
 
-Same principle applies despite the word obviously. Think I've really answered my question then. 
+Same principle applies despite the word obviously. Think I've really answered my question then.
+
+---
+
+# Where are we? Where are we going? (Wednesday, 22 April 2020, 14:51PM)
+
+## Where are we?
+
+A week later and where are we? We have
+
+- 4'33"
+- Dressage
+- Immortal
+- Pacifist
+- Psionic
+
+So I guess the proper new one is Dressage, which has been the most complex to implement, but which is a simple idea. Just the "Simon" game as applied with knight moves. Makes sense, work. Need to decide whether it goes on forever or if you can just have a tie? Maybe there are... 16 as the total pattern and it's a draw if you both reach that? Or maybe 8? Something like that makes sense.
+
+## Where are we going?
+
+The big question is what the final three games in the set should be.
+
+### Halves
+
+I've had a lot of trouble with this one the more I think about it. Questions like:
+- Can a half-piece give check? Can it be part of a checkmate?
+- Can two half-pieces of different types occupy the same square? (If so, how do you then choose which one you want to move? Seems kind of UI nightmare?)
+- Can a whole piece move through a half piece or do they obstruct all pieces (except knights) in the same way as any other piece? E.g. if you develop e4 by half, can you then move your bishop? And if not, then the early game seems like it'll be a lot of double pawn moves to provide outlets? Or maybe a half piece can move through another half piece? That seems pretty damn stupid though.
+
+Basically it seems philosophically shitty?
+
+But that's really disappointing because I really like this idea in principle, damnit.
+
+What happens if we do:
+
+- Half pieces can give check (why not)
+- Two half-pieces can only occupy one square if they add into a whole piece
+- A half-pieces cannot move through each other
+
+And we just try it and see if it makes any sense and/or is too boring for words?
+
+### Ghost
+
+I think this one is fine as an idea, no real need to think about it just need to implement the idea of an animated cursor coming onto the screen, choosing a piece and then a destination, unless you choose something yourselve in which case it moves away?
+
+### Comedy
+
+I basically still need to do more research to find laughs and think about the question of how they can sound "natural" in the context of the game. Basically it's very easy to write the world's simplest prototype (random laugh SFX after a given move) and see what it's like. It may even be that it doesn't need to sound like a consistent audience.
+
+### Memory
+
+Not really on the list, but I would like to think more about it? The principle is meant to be that you get shown the board (maybe once? maybe before each turn?) and then all the squares flip and you have to make your move based on memory. You'd choose the first square, it flips, and then you choose the destination, it flips, the move happens, and then they all flip back.
+
+Maybe it's funnier and funner if you have to play memory chess all the way through? Seems worth trying out.
