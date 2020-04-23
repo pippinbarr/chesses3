@@ -18,13 +18,29 @@ class Ghost extends BaseChess {
       })
       .appendTo('body');
 
-    setTimeout(() => {
-      this.ghostClick('e2');
-    }, 2000);
+    this.ghostOn();
+  }
 
-    // $(document).on('click', () => {
-    //   this.cursor.stop();
-    // });
+  ghostOn() {
+    setTimeout(() => {
+      if (this.inputEnabled) {
+        let moves = this.game.moves({
+          verbose: true
+        });
+        let move = getRandomElement(moves);
+        this.ghostMove(move.from, move.to);
+      }
+    }, 5000);
+  }
+
+  ghostMove(from, to) {
+    this.ghostClick(from, () => {
+      setTimeout(() => {
+        if (this.inputEnabled) {
+          this.ghostClick(to);
+        }
+      }, 2000);
+    });
   }
 
   ghostClick(square, callback) {
@@ -46,7 +62,7 @@ class Ghost extends BaseChess {
         top: `+=0px`
       }, 2000, () => {
         $square.trigger('click');
-        callback();
+        if (callback) callback();
       });
     });
   }
