@@ -10,11 +10,6 @@ class Comedy extends BaseChess {
     super();
   }
 
-  quit() {
-    $('#cage').text(`4'33"`);
-    clearInterval(this.interval);
-  }
-
   moveCompleted() {
     super.moveCompleted();
     if (Math.random() < 0.25) {
@@ -23,4 +18,7 @@ class Comedy extends BaseChess {
       laugh.play();
     }
   }
+
+  quit() {}
+
 }

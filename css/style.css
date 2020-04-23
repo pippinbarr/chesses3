@@ -95,7 +95,7 @@ body {
   font-size: 1.5em;
   line-height: 2em;
   letter-spacing: 1em;
-  color: yellow;
+  color: cyan;
   text-align: center;
   padding-left: 1em;
   /* margin-bottom: 0.5em; */
@@ -106,7 +106,7 @@ body {
 }
 
 a {
-  color: yellow;
+  color: cyan;
   /* text-decoration: none; */
 }
 
@@ -114,7 +114,7 @@ a {
   font-size: 0.75em;
   line-height: 1em;
   letter-spacing: 1em;
-  color: yellow;
+  color: cyan;
   text-align: center;
   padding-left: 1em;
   padding-top: 1em;
@@ -144,7 +144,7 @@ a {
 }
 
 #message {
-  background-color: yellow;
+  background-color: cyan;
   color: black;
   text-align: center;
   font-size: 1em;
@@ -156,7 +156,7 @@ a {
 
 #verbose-message {
   background-color: black;
-  color: yellow;
+  color: cyan;
   text-align: center;
   font-size: 1em;
   padding-left: 1em;
@@ -178,11 +178,11 @@ a {
 }
 
 .whiteTurn {
-  border-bottom: .25em solid yellow;
+  border-bottom: .25em solid cyan;
 }
 
 .blackTurn {
-  border-top: .25em solid yellow;
+  border-top: .25em solid cyan;
 }
 
 

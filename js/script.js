@@ -22,12 +22,14 @@ let chess;
 let menu = [{
     title: `4'33"`,
     id: `cage`,
-    class: Cage
+    class: Cage,
+    info: `A tribute to John Cage's wonderful and imicable musical piece <a href="https://en.wikipedia.org/wiki/4%E2%80%B233%E2%80%B3" target="_blank">4'33"</a>.`
   },
   {
     title: `IMMORTAL`,
     id: `immortal`,
-    class: Immortal
+    class: Immortal,
+    info: `Experience the remarkable chess game known as <a href="https://www.chessgames.com/perl/chessgame?gid=1011478" target="_blank">Kasparov's Immortal</a>!`
   },
   {
     title: `PACIFIST`,
@@ -42,7 +44,8 @@ let menu = [{
   {
     title: `DRESSAGE`,
     id: `dressage`,
-    class: Dressage
+    class: Dressage,
+    info: `The highest expression of horse training. Horse and rider are expected to perform from memory a series of predetermined movements.`
   },
   {
     title: `MEMORY`,
@@ -52,7 +55,8 @@ let menu = [{
   {
     title: `COMEDY`,
     id: `comedy`,
-    class: Comedy
+    class: Comedy,
+    info: `Ha ha.`
   },
 ];
 
@@ -77,16 +81,19 @@ function chessesSetup() {
     let $menuItem = $('<div>')
       .addClass('menu-item active')
       .attr('id', menu[i].id)
-      .html(`${menu[i].title}`)
-      .data('game', menu[i].title)
+      .data('game', menu[i].id)
       .data('info', menu[i].info)
       .data('index', i)
       .on('click', menuClicked) // Click event for desktop
       .on('touchstart', menuClicked) // Touch event for mobile
       .appendTo('#menu');
+    let $menuText = $('<span>')
+      .attr('id', `${menu[i].id}-title`)
+      .html(`${menu[i].title}`)
+      .appendTo($menuItem);
     // Info icon will be positioned to the right of the title if needed
-    let $infoSymbol = $('<span class="info">ⓘ</span>');
-    $menuItem.append($infoSymbol);
+    let $infoSymbol = $('<span class="info">ⓘ</span>')
+      .appendTo($menuItem);
   }
 
   // The info panel is used to display extra information about specific games
@@ -161,6 +168,7 @@ function menuClicked(e) {
         $(this).find('.instruction').slideDown();
         // If there is an info icon for this game, fade it in so they notice
         if ($(this).data('info')) {
+          console.log("Showing info.")
           $(`#${$(this).data('game')} .info`).stop().animate({
             opacity: 1
           }, 1000);

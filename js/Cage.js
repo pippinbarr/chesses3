@@ -22,12 +22,12 @@ class Cage extends BaseChess {
         minutes--;
         seconds = 59;
       }
-      $(`#cage`).text(`${minutes}'${seconds < 10 ? '0' : ''}${seconds}"`);
+      $(`#cage-title`).text(`${minutes}'${seconds < 10 ? '0' : ''}${seconds}"`);
     }, 1000);
   }
 
   quit() {
-    $('#cage').text(`4'33"`);
+    $('#cage-title').text(`4'33"`);
     clearInterval(this.interval);
   }
 }

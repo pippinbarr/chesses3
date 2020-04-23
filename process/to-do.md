@@ -3,12 +3,12 @@
 # 4'33"
 
 - ~~__IT'S GREAT__ Make it~~
-
-- Info panel
+- ~~Info panel~~
 
 # COMEDY
 
 - ~~Prototype~~
+- ~~Info panel~~
 
 - Any need to work on when laughs happen?
 - Any need for background ambience to blend the sound?
@@ -16,8 +16,7 @@
 # PSIONIC
 
 - ~~Make it~~
-
-- Info panel
+- ~~__NO__ Info panel~~
 
 # HALVES
 
@@ -30,16 +29,18 @@
 
 - ~~_NOT BAD__ First draft~~
 - ~~__NO DON'T__ Add in square highlighting pre-move so they know what to play?~~
-
-- Info panel (include a link to the PGN of the game)
+- ~~Info panel (include a link to the PGN of the game)~~
 
 # PACIFIST
 
 - ~~__WORKS WELL__ First draft~~
+- Remove check and checkmate?
 
-- Info panel
+- Info panel?
 
 # GHOST
+
+- Prototype...
 
 # DRESSAGE
 
@@ -50,9 +51,9 @@
 - ~~Reset the knight faster but add a pause after that~~
 - ~~Track pattern lengths individually so one player could be on 4 while the other is on 5 for instance?~~
 - ~~Consider whether we want one giant pattern each instead of a constantly random one (Simon music game does this too)~~
+- ~~Info panel~~
 
 - Sounds for each move that are maybe more nice sounding, channeling Simon Says? Rising tones?
-- Info panel
 - Draw if you both reach the end of the pattern (I suppose if one player gets to the end and then the other fails then the player who reached the end wins)
 
 # MEMORY
@@ -61,7 +62,6 @@
 - ~~UI niceties around flipping and responses~~
 - ~~__NO YOU SHOULD REMEMBER__ Should the game indicate that you're in check?~~
 - ~~Dealing with check and checkmate (and making a bad move while in check)~~
-
-- Info panel
+- ~~__NO__ Info panel~~
 
 # MEMENTO
