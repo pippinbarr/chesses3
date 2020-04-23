@@ -17,15 +17,8 @@ class Memory extends BaseChess {
     });
 
     setTimeout(() => {
-      let context = this;
-      for (let f = 0; f < FILES.length; f++) {
-        for (let r = 0; r < 8; r++) {
-          setTimeout(() => {
-            this.flip(`${FILES[f]}${RANKS[r]}`);
-          }, 100 * (f + r));
-        }
-      }
-    }, 1000);
+      this.flipAll();
+    }, 1000)
   }
 
   flip(square, callback) {
@@ -55,7 +48,14 @@ class Memory extends BaseChess {
   }
 
   flipAll() {
-    $(SQUARE).children('flipper').show();
+    let context = this;
+    for (let f = 0; f < FILES.length; f++) {
+      for (let r = 0; r < 8; r++) {
+        setTimeout(() => {
+          this.flip(`${FILES[f]}${RANKS[r]}`);
+        }, 100 * (f + r));
+      }
+    }
   }
 
   squareClicked(event) {
@@ -88,14 +88,20 @@ class Memory extends BaseChess {
         }, 50, () => {
           setTimeout(() => {
             this.flip(this.from, () => {
-              this.flipTurn();
-              this.changeTurn();
-              this.enableInput();
-              this.hideMessage();
+              if (this.game.in_check()) {
+                // CHECKMATE
+                this.flipAll();
+                this.showResult(true, this.getTurn(false));
+              }
+              else {
+                this.flipTurn();
+                this.changeTurn();
+                this.enableInput();
+                this.hideMessage();
+              }
             });
           }, 1000);
-        })
-
+        });
         return;
       }
       this.highlightMoves(moves);
@@ -159,6 +165,7 @@ class Memory extends BaseChess {
     this.to = null;
     let moves = this.getMoves();
     if (moves.length === 0) {
+      this.flipAll();
       if (this.game.in_check()) {
         // CHECKMATE
         this.showResult(true, this.getTurn(false));

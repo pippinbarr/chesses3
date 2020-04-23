@@ -52,4 +52,11 @@
 
 # MEMORY
 
+- ~~Prototype~~
+- ~~UI niceties around flipping and responses~~
+- ~~__NO YOU SHOULD REMEMBER__ Should the game indicate that you're in check?~~
+- ~~Dealing with check and checkmate (and making a bad move while in check)~~
+
+- Info panel
+
 # MEMENTO
