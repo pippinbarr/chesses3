@@ -40,12 +40,15 @@
 
 # GHOST
 
-- Animate a little hand icon around on the screen
-- Choose a square/piece and target it with the hand
-- If the hand reaches it, select it, then move toward target square
-- If delay ends then make the move
+- ~~Animate a little hand icon around on the screen~~
+- ~~Choose a square/piece and target it with the hand~~
+- ~~If the hand reaches it, select it, then move toward target square~~
+- ~~If delay ends then make the move~~
+
+- Make the ghost come in at random (for both players I suppose)
+- Music!
 - If the user clicks any other piece/square or maybe even moves mouse near the cursor it goes away?
-- By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
+- Attribute hand on info panel? Or just press kit? By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
 
 # DRESSAGE
 
