@@ -58,6 +58,12 @@ let menu = [{
     class: Comedy,
     info: `Ha ha.`
   },
+  {
+    title: `GHOST`,
+    id: `ghost`,
+    class: Ghost,
+    // info: `...`
+  },
 ];
 
 // Laughter

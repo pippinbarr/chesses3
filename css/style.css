@@ -63,6 +63,14 @@ This is the style file for this project.
   pointer-events: none;
 }
 
+/* GHOST */
+
+.ghost-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /* GENERAL */
 
 @font-face {
