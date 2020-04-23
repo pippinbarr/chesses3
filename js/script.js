@@ -44,6 +44,11 @@ let menu = [{
     id: `dressage`,
     class: Dressage
   },
+  {
+    title: `MEMORY`,
+    id: `memory`,
+    class: Memory
+  },
 ];
 
 $(document).ready(chessesSetup);

@@ -111,21 +111,6 @@ class BaseChess {
     return moves;
   }
 
-  // Highlights the moves available to the piece on the given square
-  // and sets it up as the current 'from'
-  highlightMoves(moves) {
-    this.clearHighlights();
-
-    // exit if there are no moves available for this square
-    if (moves.length === 0) return 0;
-
-    moves.forEach((move) => {
-      this.highlight(move.to);
-    });
-
-    return moves.length;
-  }
-
   move(from, to, silent) {
     if (silent === undefined) silent = false;
 
@@ -161,6 +146,21 @@ class BaseChess {
     }
 
     return move;
+  }
+
+  // Highlights the moves available to the piece on the given square
+  // and sets it up as the current 'from'
+  highlightMoves(moves) {
+    this.clearHighlights();
+
+    // exit if there are no moves available for this square
+    if (moves.length === 0) return 0;
+
+    moves.forEach((move) => {
+      this.highlight(move.to);
+    });
+
+    return moves.length;
   }
 
   // Remove highlights from every square on the board
