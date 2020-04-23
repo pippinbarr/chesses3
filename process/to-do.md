@@ -8,6 +8,11 @@
 
 # COMEDY
 
+- ~~Prototype~~
+
+- Any need to work on when laughs happen?
+- Any need for background ambience to blend the sound?
+
 # PSIONIC
 
 - ~~Make it~~
@@ -24,9 +29,9 @@
 # IMMORTAL
 
 - ~~_NOT BAD__ First draft~~
+- ~~__NO DON'T__ Add in square highlighting pre-move so they know what to play?~~
 
-- Add in square highlighting pre-move so they know what to play?
-- Info panel
+- Info panel (include a link to the PGN of the game)
 
 # PACIFIST
 

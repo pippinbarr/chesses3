@@ -49,7 +49,18 @@ let menu = [{
     id: `memory`,
     class: Memory
   },
+  {
+    title: `COMEDY`,
+    id: `comedy`,
+    class: Comedy
+  },
 ];
+
+// Laughter
+let laughs = [];
+for (let i = 1; i <= 16; i++) {
+  laughs.push(new Audio(`assets/sounds/laughs/laugh-${i}.wav`));
+}
 
 $(document).ready(chessesSetup);
 
