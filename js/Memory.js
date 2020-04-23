@@ -59,6 +59,8 @@ class Memory extends BaseChess {
   }
 
   squareClicked(event) {
+    this.disableInput();
+
     // Find out the notation of the square and also the element representing the piece
     let square = $(event.currentTarget).attr('data-square');
 
@@ -74,6 +76,7 @@ class Memory extends BaseChess {
     let validPiece = (piece.length !== 0 && piece.attr('data-piece').indexOf(this.game.turn()) !== -1);
 
     if (this.from === null && validPiece) {
+      console.log("Valid piece.");
       // We haven't selected a move yet + a piece of the correct colour was selected
       this.from = square;
       let moves = this.getMoves(square);
@@ -91,13 +94,15 @@ class Memory extends BaseChess {
               this.hideMessage();
             });
           }, 1000);
-        });
+        })
 
         return;
       }
       this.highlightMoves(moves);
+      this.enableInput();
     }
     else if (this.from !== null) {
+      console.log("Selected destination.");
       this.to = $(event.currentTarget).attr('data-square');
       // We have already selected a square to move from (and thus a piece)
       if ($(event.currentTarget).hasClass('invisible-highlighter')) {
@@ -121,6 +126,19 @@ class Memory extends BaseChess {
         });
       }
     }
+    else {
+      this.from = square;
+      console.log("Selected an invalid square");
+      setTimeout(() => {
+        this.flip(this.to);
+        this.flip(this.from, () => {
+          this.flipTurn();
+          this.changeTurn();
+          this.enableInput();
+          this.hideMessage();
+        });
+      }, 1000);
+    }
   }
 
   move(from, to) {
@@ -129,9 +147,10 @@ class Memory extends BaseChess {
   }
 
   moveCompleted() {
-    this.flip(this.from);
-    this.flip(this.to, () => {
-      this.moveCompletedPartTwo();
+    this.flip(this.from, () => {
+      this.flip(this.to, () => {
+        this.moveCompletedPartTwo();
+      });
     });
   }
 
