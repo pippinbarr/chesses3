@@ -10,9 +10,18 @@ class Comedy extends BaseChess {
     super();
   }
 
+  squareClicked(event) {
+    super.squareClicked(event);
+    this.laugh();
+  }
+
   moveCompleted() {
     super.moveCompleted();
-    if (Math.random() < 0.25) {
+    this.laugh();
+  }
+
+  laugh() {
+    if (Math.random() < 0.15) {
       let laugh = getRandomElement(laughs);
       laugh.currentTime = 0;
       laugh.play();

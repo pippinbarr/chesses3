@@ -38,6 +38,8 @@
 - ~~Remove check and checkmate?~~
 - ~~Info panel?~~
 
+- Check for no possible moves and end the game peacefully? (It would be VERY particular, I don't really think it's plausible?)
+
 # GHOST
 
 - ~~Animate a little hand icon around on the screen~~
