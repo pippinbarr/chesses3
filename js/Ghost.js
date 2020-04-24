@@ -6,12 +6,17 @@
 
 const GHOST_DELAY_MIN = 5000;
 const GHOST_DELAY_RANGE = 5000;
-const GHOST_SPEED = 0.1;
+const GHOST_ARRIVE_SPEED = 0.1;
+const GHOST_LEAVE_SPEED = 0.5;
 const LOW_VOLUME = 0.025;
 const HIGH_VOLUME = 0.3;
 const ghostMusic = new Howl({
   src: ['assets/sounds/unchained-melody.mp3', 'assets/sounds/unchained-melody.ogg']
 });
+const translate = {
+  w: 'translate(-10px,-10px)',
+  b: 'translate(-10px,-30px)'
+}
 
 class Ghost extends BaseChess {
 
@@ -19,13 +24,15 @@ class Ghost extends BaseChess {
     super();
 
     this.cursor = $('<img>')
-      .attr('src', 'assets/images/ghost-cursor.png')
+      .attr('src', 'assets/images/ghost-cursor-w.png')
       .addClass('ghost-cursor')
       .css({
         top: $(window).height() / 2,
         left: -100
       })
       .appendTo('body');
+    this.cursor.leaving = false;
+    this.cursor.offScreen = true;
 
     ghostMusic.volume(0);
     ghostMusic.play();
@@ -42,15 +49,25 @@ class Ghost extends BaseChess {
     if (this.gameOver) {
       return;
     }
-    if (this.inputEnabled) {
+    if (this.inputEnabled && !this.cursor.leaving && this.cursor.offScreen) {
       this.ghostTimer(() => {
+        this.cursor.attr('src', `assets/images/ghost-cursor-${this.game.turn()}.png`);
+        let top = $(window).height() / 2;
+        let left = this.game.turn() === 'w' ? -100 : $(window).width() + 100;
+        this.cursor.css({
+          transform: translate[this.game.turn()],
+          top: top,
+          left: left
+        });
         let moves = this.game.moves({
           verbose: true
         });
         let move = getRandomElement(moves);
         ghostMusic.fade(ghostMusic.volume(), HIGH_VOLUME, 3000);
         this.makeGhostMove(move.from, move.to);
-      }, GHOST_DELAY_MIN + Math.random() * GHOST_DELAY_RANGE);
+        this.cursor.offScreen = false;
+      }, 1000);
+      // }, GHOST_DELAY_MIN + Math.random() * GHOST_DELAY_RANGE);
     }
     else {
       this.ghostTimer(() => {
@@ -68,6 +85,7 @@ class Ghost extends BaseChess {
   }
 
   makeGhostMove(from, to) {
+    // console.log(`makeGhostMove(), turn: ${this.game.turn()}`);
     this.ghostClick(from, () => {
       this.ghostTimer(() => {
         this.ghostClick(to, () => {
@@ -79,16 +97,19 @@ class Ghost extends BaseChess {
   }
 
   ghostClick(square, callback) {
+    // console.log(`ghostClick(${square}), turn: ${this.game.turn()}`);
     let $square = $(`.square-${square}`);
     let top = $square.offset().top + $square.height() / 2;
     let left = $square.offset().left + $square.width() / 2;
 
-    this.ghostMoveTo(left, top, () => {
+    this.ghostMoveTo(left, top, GHOST_ARRIVE_SPEED, () => {
       this.ghostTimer(() => {
         $square.trigger('click', [true]);
-        this.cursor.attr('src', 'assets/images/ghost-cursor-click.png');
+        let src = this.cursor.attr('src');
+        let newSrc = src.replace('.png', '-click.png');
+        this.cursor.attr('src', newSrc);
         setTimeout(() => {
-          this.cursor.attr('src', 'assets/images/ghost-cursor.png');
+          this.cursor.attr('src', src);
         }, 500);
         if (callback) callback();
       }, 1000 + Math.random() * 2000);
@@ -97,19 +118,27 @@ class Ghost extends BaseChess {
 
   squareClicked(event, ghost) {
     super.squareClicked(event);
-    if (!ghost) {
+    if (!ghost && !this.cursor.leaving) {
       this.ghostOff();
     };
   }
 
   ghostOff() {
+    if (this.cursor.leaving || this.cursor.offScreen) return;
+    // console.log(`ghostOff(), turn: ${this.game.turn()}`);
+    this.cursor.stop(true);
+    this.leaving = true;
     ghostMusic.fade(ghostMusic.volume(), LOW_VOLUME, 3000);
-    this.ghostMoveTo(-100, $(window).height() / 2, () => {
+    let top = $(window).height() / 2;
+    let left = this.game.turn() === 'w' ? -100 : $(window).width() + 100;
+    this.ghostMoveTo(left, top, GHOST_LEAVE_SPEED, () => {
+      this.leaving = false;
+      this.cursor.offScreen = true;
       this.ghostOn();
     });
   }
 
-  ghostMoveTo(x, y, callback) {
+  ghostMoveTo(x, y, speed, callback) {
     let startTop = this.cursor.offset().top;
     let startLeft = this.cursor.offset().left;
     let top = y;
@@ -122,7 +151,7 @@ class Ghost extends BaseChess {
     this.cursor.animate({
       top: `${top}px`,
       left: `${left}px`
-    }, distance / GHOST_SPEED, () => {
+    }, distance / speed, () => {
       if (callback) callback();
     });
   }
