@@ -86,6 +86,10 @@ class Ghost extends BaseChess {
     this.ghostMoveTo(left, top, () => {
       this.ghostTimer(() => {
         $square.trigger('click', [true]);
+        this.cursor.attr('src', 'assets/images/ghost-cursor-click.png');
+        setTimeout(() => {
+          this.cursor.attr('src', 'assets/images/ghost-cursor.png');
+        }, 500);
         if (callback) callback();
       }, 1000 + Math.random() * 2000);
     });
