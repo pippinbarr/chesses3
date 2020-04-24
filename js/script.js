@@ -56,13 +56,15 @@ let menu = [{
     title: `COMEDY`,
     id: `comedy`,
     class: Comedy,
-    info: `Ha ha.`
+    info: `Ha ha.
+
+    (Laughter from <a href="https://freesound.org/people/sandyrb/>sandyrb</a> on <a href="https://freesound.org/>Freesound</a>.)`
   },
   {
     title: `GHOST`,
     id: `ghost`,
     class: Ghost,
-    // info: `...`
+    info: `As in <a href="https://en.wikipedia.org/wiki/Ghost_(1990_film)">Ghost (1990)</a>.`
   },
 ];
 
@@ -174,7 +176,6 @@ function menuClicked(e) {
         $(this).find('.instruction').slideDown();
         // If there is an info icon for this game, fade it in so they notice
         if ($(this).data('info')) {
-          console.log("Showing info.")
           $(`#${$(this).data('game')} .info`).stop().animate({
             opacity: 1
           }, 1000);

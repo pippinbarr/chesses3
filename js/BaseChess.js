@@ -201,8 +201,8 @@ class BaseChess {
   enableInput() {
     if (this.inputEnabled) return;
     this.inputEnabled = true;
-    $(SQUARE).on('click', (event) => {
-      this.squareClicked(event);
+    $(SQUARE).on('click', (event, ghost) => {
+      this.squareClicked(event, ghost);
     });
   }
 

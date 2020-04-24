@@ -7,6 +7,11 @@
 const GHOST_DELAY_MIN = 5000;
 const GHOST_DELAY_RANGE = 5000;
 const GHOST_SPEED = 0.25;
+const LOW_VOLUME = 0.025;
+const HIGH_VOLUME = 1.0;
+const ghostMusic = new Howl({
+  src: ['assets/sounds/unchained-melody.mp3', 'assets/sounds/unchained-melody.ogg']
+});
 
 class Ghost extends BaseChess {
 
@@ -22,6 +27,10 @@ class Ghost extends BaseChess {
       })
       .appendTo('body');
 
+    ghostMusic.volume(0);
+    ghostMusic.play();
+    ghostMusic.fade(0, LOW_VOLUME, 10000);
+
     this.ghostOn();
 
     setInterval(() => {
@@ -31,49 +40,43 @@ class Ghost extends BaseChess {
 
   ghostOn() {
     if (this.inputEnabled) {
-      setTimeout(() => {
+      this.ghostTimer(() => {
         let moves = this.game.moves({
           verbose: true
         });
         let move = getRandomElement(moves);
-        this.ghostMove(move.from, move.to);
-      }, GHOST_DELAY_MIN + Math.random() * GHOST_DELAY_RANGE);
+        this.makeGhostMove(move.from, move.to);
+      }, 1000);
     }
     else {
-      setTimeout(() => {
+      this.ghostTimer(() => {
         this.ghostOn();
       }, 1000);
     }
   }
 
-  ghostOff() {
-    let startTop = this.cursor.offset().top;
-    let startLeft = this.cursor.offset().left;
-    let top = $(window).height() / 2;
-    let left = -100;
-    let dx = top - startTop;
-    let dy = left - startLeft;
-    let distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-
+  ghostTimer(callback, time) {
     this.cursor.animate({
-      top: `${top}px`,
-      left: `${left}px`
-    }, distance / GHOST_SPEED, () => {
-      this.ghostOn();
+      top: `+=0px`
+    }, time, () => {
+      callback();
     });
   }
 
-  ghostMove(from, to) {
+  makeGhostMove(from, to) {
+    console.log(`makeGhostMove(${from},${to})`);
     this.ghostClick(from, () => {
-      this.cursor.animate({
-        top: `+=0px`
-      }, 2000, () => {
-        this.ghostClick(to);
-      });
-    });
+      this.ghostTimer(() => {
+        this.ghostClick(to, () => {
+          this.ghostOff();
+        });
+      }, 1000);
+    })
+    ''
   }
 
   ghostClick(square, callback) {
+    console.log(`ghostClick(${square})`);
     let $square = $(`.square-${square}`);
     let startTop = this.cursor.offset().top;
     let startLeft = this.cursor.offset().left;
@@ -88,20 +91,38 @@ class Ghost extends BaseChess {
       top: `${top}px`,
       left: `${left}px`
     }, distance / GHOST_SPEED, () => {
-      this.cursor.animate({
-        top: `+=0px`
-      }, 2000, () => {
-        $square.trigger('click');
-        this.ghostOn();
+      this.ghostTimer(() => {
+        $square.trigger('click', [true]);
         if (callback) callback();
-      });
+      }, 2000);
     });
   }
 
-  squareClicked(event) {
+  squareClicked(event, ghost) {
     super.squareClicked(event);
+    console.log(ghost);
+    if (!ghost) {
+      this.ghostOff();
+    }
+  }
+
+  ghostOff() {
+    console.log("ghostOff()");
+    let startTop = this.cursor.offset().top;
+    let startLeft = this.cursor.offset().left;
+    let top = $(window).height() / 2;
+    let left = -100;
+    let dx = top - startTop;
+    let dy = left - startLeft;
+    let distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
     this.cursor.stop(true);
-    this.ghostOff();
+    this.cursor.animate({
+      top: `${top}px`,
+      left: `${left}px`
+    }, distance / GHOST_SPEED, () => {
+      this.ghostOn();
+    });
   }
 
   quit() {}
