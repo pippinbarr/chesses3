@@ -9,17 +9,18 @@
 
 - ~~Prototype~~
 - ~~Info panel~~
+- ~~__IT SEEMS FINE__ Any need for background ambience to blend the sound?~~
 
 - Any need to work on when laughs happen?
-- Any need for background ambience to blend the sound?
 
 # PSIONIC
 
 - ~~Make it~~
 - ~~__NO__ Info panel~~
 
-# HALVES
+# ~~HALVES~~
 
+- __ABANDONED__
 - What happens when half a piece puts the king in check?
 - What happens when half of one type of piece moves onto half of another type of piece? (Could you run out of board real estate if they can't colocate? How do you choose which moves if they can?)
 - Maybe you can just only ever move half a piece? So halves don't get halved, they just move. And a half can't capture a whole, but a whole can capture a half (and a whole), a half can capture a half...?
@@ -34,9 +35,8 @@
 # PACIFIST
 
 - ~~__WORKS WELL__ First draft~~
-- Remove check and checkmate?
-
-- Info panel?
+- ~~Remove check and checkmate?~~
+- ~~Info panel?~~
 
 # GHOST
 
@@ -44,11 +44,12 @@
 - ~~Choose a square/piece and target it with the hand~~
 - ~~If the hand reaches it, select it, then move toward target square~~
 - ~~If delay ends then make the move~~
+- ~~Make the ghost come in at random (for both players I suppose)~~
+- ~~Music!~~
+- ~~If the user clicks any other piece/square or maybe even moves mouse near the cursor it goes away?~~
+- ~~Add a click animation to the hand~~
 
-- Make the ghost come in at random (for both players I suppose)
-- Music!
-- If the user clicks any other piece/square or maybe even moves mouse near the cursor it goes away?
-- Attribute hand on info panel? Or just press kit? By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
+- Attribute hand in press kit: By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
 
 # DRESSAGE
 
