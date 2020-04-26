@@ -163,6 +163,7 @@ class Ghost extends BaseChess {
 
   quit() {
     this.cursor.stop();
-    $('body').remove(this.cursor);
+    $('body').remove(this.cursor.w);
+    $('body').remove(this.cursor.b);
   }
 }

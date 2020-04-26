@@ -126,3 +126,19 @@ I basically still need to do more research to find laughs and think about the qu
 Not really on the list, but I would like to think more about it? The principle is meant to be that you get shown the board (maybe once? maybe before each turn?) and then all the squares flip and you have to make your move based on memory. You'd choose the first square, it flips, and then you choose the destination, it flips, the move happens, and then they all flip back.
 
 Maybe it's funnier and funner if you have to play memory chess all the way through? Seems worth trying out.
+
+---
+
+# Final stretch? (Friday, 24 April 2020, 20:06PM and Saturday, 25 April 2020, 19:59PM)
+
+Well I think most the game is actually kind of together now?
+
+Kicked off exactly two weeks ago today, so that's nice. Not that it's a race, but it's good to run fast when you can, right?
+
+I think that in the end I have kind of two games that are perhaps actual games (MEMORY and DRESSAGE), another one that's at least edutainment (IMMORTAL), and then a bunch of quirks/jokes, which I think is a perfectly reasonable balance. Especially happy with how COMEDY turned out after worrying about creating a believable "studio audience" atmosphere throughout play. Thanks to the particular laughs I found, it turns out it's way better to have one person laughing, because it's so much more pointed.
+
+Remaining is some tidying up of Dressage and a bit of stress testing I suppose?
+
+If I were to (at some point) manage to make eight more chesses I would actually have managed to equal PONGS and BREAKSOUT which I find kind of remarkable. I didn't think I'd have been able to make quite so many as I've made! Nice one.
+
+... the next day. Ummm, yes. Well it's going well then eh. I should just fix up the dressage stuff and release? I'll send it to Jim and Mary I suppose as well to stress test it on that front now? Yeah.
