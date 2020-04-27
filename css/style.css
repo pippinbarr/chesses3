@@ -69,6 +69,10 @@ This is the style file for this project.
   position: absolute;
   top: 0;
   left: 0;
+  background-image: url(../assets/images/ghost-cursor-w.png);
+  background-size: cover;
+  width: 1.25em;
+  height: 1.25em;
 }
 
 /* GENERAL */
@@ -87,6 +91,7 @@ body {
   background-color: black;
   user-select: none;
   -webkit-user-select: none;
+  overflow: hidden;
 }
 
 #game {
@@ -115,13 +120,12 @@ body {
 
 a {
   color: cyan;
-  /* text-decoration: none; */
 }
 
 #author {
   font-size: 0.75em;
   line-height: 1em;
-  letter-spacing: 1em;
+  letter-spacing: 0.5em;
   color: cyan;
   text-align: center;
   padding-left: 1em;
@@ -200,6 +204,7 @@ a {
 @media only screen and (max-device-width: 768px) {
   body {
     font-size: 3em;
+    overflow: hidden;
   }
 
   #wrapper {
@@ -222,6 +227,7 @@ a {
   body {
     font-size: 1em;
     padding-top: 2em;
+    overflow: hidden;
   }
 
   #wrapper {

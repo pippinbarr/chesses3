@@ -23,8 +23,7 @@ class Ghost extends BaseChess {
   constructor() {
     super();
 
-    this.cursor = $('<img>')
-      .attr('src', 'assets/images/ghost-cursor-w.png')
+    this.cursor = $('<div>')
       .addClass('ghost-cursor')
       .css({
         top: $(window).height() / 2,
@@ -51,7 +50,9 @@ class Ghost extends BaseChess {
     }
     if (this.inputEnabled && !this.cursor.leaving && this.cursor.offScreen) {
       this.ghostTimer(() => {
-        this.cursor.attr('src', `assets/images/ghost-cursor-${this.game.turn()}.png`);
+        this.cursor.css({
+          "background-image": `url(../assets/images/ghost-cursor-${this.game.turn()}.png)`
+        });
         let top = $(window).height() / 2;
         let left = this.game.turn() === 'w' ? -100 : $(window).width() + 100;
         this.cursor.css({
@@ -105,11 +106,15 @@ class Ghost extends BaseChess {
     this.ghostMoveTo(left, top, GHOST_ARRIVE_SPEED, () => {
       this.ghostTimer(() => {
         $square.trigger('click', [true]);
-        let src = this.cursor.attr('src');
-        let newSrc = src.replace('.png', '-click.png');
-        this.cursor.attr('src', newSrc);
+        let bgImage = this.cursor.css('background-image');
+        let newBGImage = bgImage.replace('.png', '-click.png');
+        this.cursor.css({
+          "background-image": `${newBGImage}`
+        });
         setTimeout(() => {
-          this.cursor.attr('src', src);
+          this.cursor.css({
+            "background-image": `${bgImage}`
+          });
         }, 500);
         if (callback) callback();
       }, 1000 + Math.random() * 2000);

@@ -43,8 +43,8 @@
 - ~~If the user clicks any other piece/square or maybe even moves mouse near the cursor it goes away?~~
 - ~~Add a click animation to the hand~~
 - ~~Add a black hand that plays for black~~
+- ~~Mini-hand on mobile is lame~~
 
-- Mini-hand on mobile is lame
 - Attribute hand in press kit: By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
 
 # DRESSAGE
