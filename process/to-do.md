@@ -1,5 +1,7 @@
 # General
 
+- Feel like some games have a UI issue where some clicks don't register?
+
 # 4'33"
 
 - ~~__IT'S GREAT__ Make it~~
@@ -28,8 +30,7 @@
 - ~~__WORKS WELL__ First draft~~
 - ~~Remove check and checkmate?~~
 - ~~Info panel?~~
-
-- Check for no possible moves and end the game peacefully? (It would be VERY particular, I don't really think it's plausible?)
+- ~~Check for no possible moves and end the game peacefully? (It would be VERY particular, I don't really think it's plausible?)~~
 
 # GHOST
 
@@ -43,6 +44,7 @@
 - ~~Add a click animation to the hand~~
 - ~~Add a black hand that plays for black~~
 
+- Mini-hand on mobile is lame
 - Attribute hand in press kit: By Unbekannter Grafiker, keine Schöpfungshöhe - Screenshot, keine Schöpfungshöhe, Public Domain, https://commons.wikimedia.org/w/index.php?curid=7799880
 
 # DRESSAGE
@@ -55,9 +57,9 @@
 - ~~Track pattern lengths individually so one player could be on 4 while the other is on 5 for instance?~~
 - ~~Consider whether we want one giant pattern each instead of a constantly random one (Simon music game does this too)~~
 - ~~Info panel~~
-
-- Sounds for each move that are maybe more nice sounding, channeling Simon Says? Rising tones?
-- Draw if you both reach the end of the pattern (I suppose if one player gets to the end and then the other fails then the player who reached the end wins)
+- ~~Sounds for each move that are maybe more nice sounding, channeling Simon Says? Rising tones?~~
+- ~~Draw if you both reach the end of the pattern (I suppose if one player gets to the end and then the other fails then the player who reached the end wins)~~
+- ~~Fix next sequence triggering after quit~~
 
 # MEMORY
 

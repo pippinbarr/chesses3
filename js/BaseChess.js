@@ -253,7 +253,7 @@ class BaseChess {
       }
     }
     else {
-      $('#message').text('STALEMATE');
+      $('#message').text('DRAW');
     }
     $('#message').slideDown();
     this.disableInput();

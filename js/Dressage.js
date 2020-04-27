@@ -29,9 +29,28 @@ class Dressage extends BaseChess {
         currentStep: 0
       }
     }
+    this.PATTERN_LENGTH = 16;
 
-    this.data.w.pattern = this.generatePattern('w', 10);
-    this.data.b.pattern = this.generatePattern('b', 10);
+    this.data.w.pattern = this.generatePattern('w', this.PATTERN_LENGTH);
+    this.data.b.pattern = this.generatePattern('b', this.PATTERN_LENGTH);
+
+    this.tone = new Pizzicato.Sound({
+      source: 'wave',
+      options: {
+        frequency: 440
+      }
+    });
+    this.tone.baseFrequency = 300;
+    this.tone.stepFrequency = 20;
+
+    this.failTone = new Pizzicato.Sound({
+      source: 'wave',
+      options: {
+        type: 'square',
+        frequency: 123,
+        volume: 0.2,
+      }
+    });
 
     setTimeout(() => {
       this.startTurn('w');
@@ -46,7 +65,7 @@ class Dressage extends BaseChess {
     this.data[color].currentStep = 0;
     this.reset(this.data.turn);
 
-    setTimeout(() => {
+    this.showPatternTimeout = setTimeout(() => {
       this.showPattern(this.data.turn, this.data[this.data.turn].pattern);
     }, 2000);
   }
@@ -81,17 +100,19 @@ class Dressage extends BaseChess {
   showPattern(color, pattern) {
     let i = 0;
     this.highlight(pattern[0].from);
-    let interval = setInterval(() => {
+    this.playStep(0);
+    this.showPatternInterval = setInterval(() => {
       if (i === this.data[color].currentLength) {
-        clearInterval(interval);
+        clearInterval(this.showPatternInterval);
         this.clearHighlights();
         this.enableInput();
         return;
       }
       this.clearHighlights();
       this.highlight(pattern[i].to);
+      this.playStep(i + 1);
       i++;
-    }, 500);
+    }, 750);
   }
 
   squareClicked(event) {
@@ -106,6 +127,7 @@ class Dressage extends BaseChess {
       // We are selecting the correct knight to begin
       this.from = square;
       this.highlight(this.from);
+      this.playStep(0);
     }
     else if (this.from !== null && square === nextMove.to) {
       this.clearHighlights();
@@ -113,7 +135,6 @@ class Dressage extends BaseChess {
       this.move(this.from, nextMove.to);
     }
     else {
-      console.log(`square: ${square}, nextMove.from: ${nextMove.from}, this.from: ${this.from}, nextMove.to: ${nextMove.to}`);
       // Either chose the wrong square or piece or something! Fail!
       $(`.square-${nextMove.from} img`).effect('shake', {
         distance: 2,
@@ -121,6 +142,7 @@ class Dressage extends BaseChess {
         duration: 400,
         direction: 'left'
       });
+      this.playFail();
       this.highlight(nextMove.to);
       this.handleTurnEnd(false);
     }
@@ -140,7 +162,7 @@ class Dressage extends BaseChess {
     // Update the board based on the new position
     this.board.position(this.game.fen(), true);
 
-    setTimeout(() => {
+    this.moveTimeout = setTimeout(() => {
       if (move && (move.flags.indexOf('c') !== -1 || move.flags.indexOf('e') !== -1)) {
         captureSFX.play();
       }
@@ -156,10 +178,13 @@ class Dressage extends BaseChess {
   moveCompleted() {
     // Revert the move to the current player (in case they need to keep going)
     this.flipTurn();
+
     // Assume they're moving the piece they just moved
     let turn = this.data.turn;
     let pattern = this.data[turn].pattern;
     let step = this.data[turn].currentStep;
+
+    this.playStep(this.data[turn].currentStep + 1);
 
     this.from = pattern[step].to;
     // Go to the next step in the pattern
@@ -172,6 +197,27 @@ class Dressage extends BaseChess {
       // Input is allowed again
       this.enableInput();
     }
+  }
+
+  playStep(step) {
+    // Play our tone
+    let frequency = this.tone.baseFrequency + this.tone.stepFrequency * step;
+    this.playTone(frequency);
+  }
+
+  playFail() {
+    this.failTone.play();
+    this.failToneTimeout = setTimeout(() => {
+      this.failTone.stop();
+    }, 500);
+  }
+
+  playTone(frequency, type) {
+    this.tone.frequency = frequency;
+    this.tone.play();
+    this.toneTimeout = setTimeout(() => {
+      this.tone.stop();
+    }, 500);
   }
 
   handleTurnEnd(correct) {
@@ -193,21 +239,25 @@ class Dressage extends BaseChess {
 
     // Check for a winner
     let scoreDifference = this.data.w.score - this.data.b.score;
-    if (scoreDifference >= 2) {
+    if ((turn === 'b' && this.data.w.score === this.PATTERN_LENGTH && !correct) || scoreDifference >= 2) {
       // White wins
       this.showMessage("WHITE WINS!");
     }
-    else if (scoreDifference <= -2) {
+    else if ((turn === 'w' && this.data.b.score === this.PATTERN_LENGTH && !correct) || scoreDifference <= -2) {
       // Black wins
       this.showMessage("BLACK WINS!");
+    }
+    else if (this.data.w.score === this.data.b.score && this.data.w.score === this.PATTERN_LENGTH) {
+      // Black wins
+      this.showMessage("DRAW!");
     }
     else {
       // Nobody has won yet
       // Switch to the next turn
       this.showMessage(resultWord);
-      setTimeout(() => {
+      this.showMessageTimeout = setTimeout(() => {
         this.hideMessage();
-        setTimeout(() => {
+        this.hideMessageTimeout = setTimeout(() => {
           // Switch turns
           this.nextTurn();
         }, 1000);
@@ -231,6 +281,14 @@ class Dressage extends BaseChess {
   }
 
   quit() {
-
+    this.tone.stop();
+    this.failTone.stop();
+    if (this.moveTimeout) clearTimeout(this.moveTimeout);
+    if (this.toneTimeout) clearTimeout(this.toneTimeout);
+    if (this.failToneTimeout) clearTimeout(this.failToneTimeout);
+    if (this.hideMessageTimeout) clearTimeout(this.hideMessageTimeout);
+    if (this.showMessageTimeout) clearTimeout(this.showMessageTimeout);
+    if (this.showPatternTimeout) clearTimeout(this.showPatternTimeout);
+    if (this.showPatternInterval) clearInterval(this.showPatternInterval);
   }
 }
