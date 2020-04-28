@@ -118,6 +118,8 @@ function chessesSetup() {
 
 // Handles returning to the menu when you click the title
 function titleClicked() {
+  captureSFX.play();
+
   // Tell the currently active version of the game to quit
   chess.quit();
 
@@ -146,6 +148,7 @@ function titleClicked() {
 
 // Handle a click on a specific menu item
 function menuClicked(e) {
+  attackSFX.play();
 
   // Use the event type to determine whether the user is on mobile or desktop
   // (We use this for the instructions for FOG)
