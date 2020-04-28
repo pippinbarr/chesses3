@@ -51,7 +51,6 @@ class BaseChess {
     });
 
     this.changeTurn();
-    this.enableInput();
   }
 
   squareClicked(event) {
@@ -98,7 +97,13 @@ class BaseChess {
         let to = $(event.currentTarget).attr('data-square');
         // console.log(this.from, to)
         this.move(this.from, to);
-      };
+      }
+      else {
+
+      }
+    }
+    else {
+
     }
   }
 
@@ -113,8 +118,6 @@ class BaseChess {
 
   move(from, to, silent) {
     if (silent === undefined) silent = false;
-
-    // if (!silent) this.disableInput();
 
     // Make the move in the game representation
     let move = {
@@ -193,7 +196,6 @@ class BaseChess {
     else {
       if (this.gameOver) return;
       this.changeTurn();
-      this.enableInput();
       this.hideMessage();
     }
   }
@@ -214,19 +216,16 @@ class BaseChess {
 
   changeTurn() {
     if (this.gameOver) return;
+    this.enableInput();
+    this.from = null;
+
     if (this.game.turn() === this.game.WHITE) {
-      $('.board-b72b1').removeClass('blackTurn', 250);
-      $('.board-b72b1').addClass('whiteTurn', 250, () => {
-        // this.enableInput();
-        this.from = null;
-      });
+      $('.board-b72b1').removeClass('blackTurn', 100);
+      $('.board-b72b1').addClass('whiteTurn', 100, () => {});
     }
     else {
-      $('.board-b72b1').removeClass('whiteTurn', 250);
-      $('.board-b72b1').addClass('blackTurn', 250, () => {
-        // this.enableInput();
-        this.from = null;
-      });
+      $('.board-b72b1').removeClass('whiteTurn', 100);
+      $('.board-b72b1').addClass('blackTurn', 100, () => {});
     }
   }
 

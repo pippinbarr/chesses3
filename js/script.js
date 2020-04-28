@@ -160,10 +160,6 @@ function menuClicked(e) {
   // Instantiate the associated class
   chess = new menu[index].class(); // Is this hideous? It works...
 
-  // Activate the title as a quit button
-  $('#title').addClass('active');
-  $('#title.active').one('click', titleClicked);
-
   // Deactivate the menu item buttons (because one of them is being
   // used to display the title of the current game and shouldn't start a new one)
   $('.menu-item').removeClass('active');
@@ -172,11 +168,15 @@ function menuClicked(e) {
   // Slide away the elements we shouldn't see, including the author
   // and all menu items not presently being played
   $('#author').slideUp();
-  $.when($('.menu-item').not(`#${menu[index].id}`).slideUp(500, () => {
+  $.when($('.menu-item').not(`#${menu[index].id}`).slideUp(500))
+    .then(() => {
       // Once all the menu items are gone, we can slide down the game
       $('#game').slideDown(() => {
+        // Activate the title as a quit button
+        $('#title').addClass('active');
+        $('#title.active').one('click', titleClicked);
         // If there are instructions slide them down (for Fog)
-        $(this).find('.instruction').slideDown();
+        $(`#${menu[index].id}`).find('.instruction').slideDown();
         // If there is an info icon for this game, fade it in so they notice
         if ($(this).data('info')) {
           $(`#${$(this).data('game')} .info`).stop().animate({
@@ -184,8 +184,6 @@ function menuClicked(e) {
           }, 1000);
         }
       });
-    }))
-    .then(() => {
       // Listen for click events on the info icon and display the panel if so
       $('.info').on('click', function(e) {
         // Don't interpret it as a click on anything else

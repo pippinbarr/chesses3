@@ -10,8 +10,7 @@ class Cage extends BaseChess {
     super();
     let minutes = 4;
     let seconds = 33;
-    $(SQUARE).off('click');
-    $('.board-b72b1').removeClass('whiteTurn', 250);
+    this.disableInput();
     this.interval = setInterval(() => {
       seconds--;
       if (seconds === 0 && minutes === 0) {
@@ -27,6 +26,7 @@ class Cage extends BaseChess {
   }
 
   quit() {
+    console.log("Quitting.");
     $('#cage-title').text(`4'33"`);
     clearInterval(this.interval);
   }

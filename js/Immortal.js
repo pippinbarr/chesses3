@@ -29,6 +29,8 @@ class Immortal extends BaseChess {
       transform: `rotate(180deg)`
     });
 
+    this.disableInput();
+
     setTimeout(() => {
       this.changeTurn();
     }, 1000);

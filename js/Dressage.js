@@ -144,6 +144,7 @@ class Dressage extends BaseChess {
       });
       this.playFail();
       this.highlight(nextMove.to);
+      this.highlight(nextMove.from);
       this.handleTurnEnd(false);
     }
   }
@@ -273,9 +274,10 @@ class Dressage extends BaseChess {
     // Flip the turn (as it would be with the player who just failed or succeeded)
     this.flipTurn();
     this.data.turn = this.game.turn();
-    console.log(`Next turn is: ${this.data.turn}`);
+    // console.log(`Next turn is: ${this.data.turn}`);
     // Indicate the turn visually
     this.changeTurn();
+    this.disableInput();
     // Generate the next pattern etc.
     this.startTurn(this.data.turn);
   }

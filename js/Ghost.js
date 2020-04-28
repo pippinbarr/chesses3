@@ -38,10 +38,6 @@ class Ghost extends BaseChess {
     ghostMusic.fade(0, LOW_VOLUME, 5000);
 
     this.ghostOn();
-
-    setInterval(() => {
-      // console.log(this.cursor.offset().left, this.cursor.offset().top);
-    }, 100)
   }
 
   ghostOn() {
@@ -168,7 +164,6 @@ class Ghost extends BaseChess {
 
   quit() {
     this.cursor.stop();
-    $('body').remove(this.cursor.w);
-    $('body').remove(this.cursor.b);
+    this.cursor.remove();
   }
 }

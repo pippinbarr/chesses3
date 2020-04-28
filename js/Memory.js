@@ -18,7 +18,9 @@ class Memory extends BaseChess {
 
     setTimeout(() => {
       this.flipAll();
-    }, 1000)
+    }, 1000);
+
+    this.disableInput();
   }
 
   flip(square, callback) {
@@ -53,6 +55,10 @@ class Memory extends BaseChess {
       for (let r = 0; r < 8; r++) {
         setTimeout(() => {
           this.flip(`${FILES[f]}${RANKS[r]}`);
+          if (r === RANKS.length - 1 && f === FILES.length - 1) {
+            // Input enabled
+            this.changeTurn();
+          }
         }, 100 * (f + r));
       }
     }
