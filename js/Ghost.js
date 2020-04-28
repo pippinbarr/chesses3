@@ -51,7 +51,7 @@ class Ghost extends BaseChess {
     if (this.inputEnabled && !this.cursor.leaving && this.cursor.offScreen) {
       this.ghostTimer(() => {
         this.cursor.css({
-          "background-image": `url(../assets/images/ghost-cursor-${this.game.turn()}.png)`
+          "background-image": `url(assets/images/ghost-cursor-${this.game.turn()}.png)`
         });
         let top = $(window).height() / 2;
         let left = this.game.turn() === 'w' ? -100 : $(window).width() + 100;
