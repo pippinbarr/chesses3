@@ -1,12 +1,12 @@
 # Chesses 3
 
-_..._
+_How much chess would a chess guy chess if a chess guy would chess chess?! Eight more chess variations hot and chessy out of the chess oven! Chess 'em up!_
 
-#### [Play _Chesses 3_](https://pippinbarr.github.io/chesses3)
+### [Play _Chesses 3_](https://pippinbarr.github.io/chesses3)
 
 ---
 
-_Chesses 3_ is yet another set of eight variations on the classic game of chess, following closely in the footsteps of [_Chesses_](https://pippinbarr.github.io/chesses/) and [_Chesses 2_](https://pippinbarr.github.io/chesses2/).
+_Chesses 3_ is the next in my _Chesses_ series, following [_Chesses_](https://pippinbarr.github.io/chesses/) and [_Chesses 2_](https://pippinbarr.github.io/chesses2/). It's eight more variations on the standard game of chess, including a test of your psionic powers, a humbling learning opportunity with Gary Kasparov, and the prestigious art of dressage.
 
 
 #### Read the [Press kit](https://github.com/pippinbarr/chesses3/blob/master/press/README.md) for press information
