@@ -171,8 +171,7 @@ function menuClicked(e) {
   $.when($('.menu-item').not(`#${menu[index].id}`).slideUp(500))
     .then(() => {
       // Once all the menu items are gone, we can slide down the game
-      $('#game').slideDown(() => {
-        // Activate the title as a quit button
+      $('#game').slideDown(() => { // Activate the title as a quit button
         $('#title').addClass('active');
         $('#title.active').one('click', titleClicked);
         // If there are instructions slide them down (for Fog)
