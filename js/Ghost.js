@@ -33,6 +33,10 @@ class Ghost extends BaseChess {
     this.cursor.leaving = false;
     this.cursor.offScreen = true;
 
+    ghostMusic.volume(0);
+    ghostMusic.play();
+    ghostMusic.fade(0, LOW_VOLUME, 5000);
+
     this.ghostOn();
   }
 
