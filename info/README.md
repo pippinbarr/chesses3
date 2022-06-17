@@ -1,4 +1,4 @@
-# Chesses 3
+# *Chesses 3*
 
 ![](images/chesses-3-banner.png)
 
