@@ -1,6 +1,6 @@
 # Chesses 3
 
-![](images/chesses-3-banner.gif)
+![](images/chesses-3-banner.png)
 
 ## [Play Online](https://www.pippinbarr.com/chesses3)
 
